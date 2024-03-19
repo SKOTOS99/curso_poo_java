@@ -1,22 +1,46 @@
 
 public class Automovil {
 	
+	private int id;
 	private String fabricante;
 	private String modelo;
 	private String color;
 	private int cantidadTanque = 40;
 	private double cilindrada;
 	
+	private static String colorPatente = "naranja";
+	private static int cantidadTanqueStatic = 50;
+	private static int ultimoId;
+	
+	
 	public  String detalle() {
 		return new StringBuilder("Fabricante: "+ this.fabricante)
+				.append("\nid " + this.id)
 				.append(" \nModelo: "+ this.modelo)
 				.append("\nColor: " + this.color)
 				.append("\nCilindrada: "+ this.cilindrada)
+				.append("\nColorPatente: " + colorPatente)
 				.append("\nVelocidad: " + this.cilindrada * 100)
 				.toString();
 					
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public static int getCantidadTanqueStatic() {
+		return cantidadTanqueStatic;
+	}
+
+	public static void setCantidadTanqueStatic(int cantidadTanqueStatic) {
+		Automovil.cantidadTanqueStatic = cantidadTanqueStatic;
+	}
+
 	public String acelerar(int rpm) {
 		return new StringBuilder("El auto: "+ this.fabricante)
 				.append(" acelerando a " + rpm)
@@ -41,6 +65,27 @@ public class Automovil {
 		return (km/(porcentajeGas * this.cantidadTanque));
 	}
 	
+	public static float calcularConsumoStatic(int km, float porcentajeGas) {
+		return (km/(porcentajeGas * Automovil.cantidadTanqueStatic));
+	}
+	
+	
+	public int getCantidadTanque() {
+		return cantidadTanque;
+	}
+
+	public void setCantidadTanque(int cantidadTanque) {
+		this.cantidadTanque = cantidadTanque;
+	}
+
+	public static String getColorPatente() {
+		return colorPatente;
+	}
+
+	public static void setColorPatente(String colorPatente) {
+		Automovil.colorPatente = colorPatente;
+	}
+
 	//sobrecarga de metodo
 	public float calcularConsumo(int km, int porcentajeGas) {
 		return (km/((porcentajeGas)/100f* this.cantidadTanque));
@@ -75,12 +120,9 @@ public class Automovil {
 		this(fabricante, modelo, color, cantidadTanque);
 		this.cilindrada = cilindrada;
 	}
-
-	public Automovil() {
-		super();
-	}
 	
 	public Automovil(String fabricante, String modelo, String color) {
+		this();//hace el llamdo al constructo que no recibe parametros
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.color = color;
@@ -94,6 +136,9 @@ public class Automovil {
 		this.cantidadTanque = cantidadTanque;
 	}
 
+	public Automovil() {
+		this.id = ++Automovil.ultimoId;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Automovil)) {
