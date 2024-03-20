@@ -6,7 +6,7 @@ public class EjemploAutomovil {
 		
 		Automovil auto = new Automovil();
 		 auto.setFabricante("Nisan");
-		 auto.setColor("rojo");
+		 auto.setColor(Colores.AZUL);
 		 auto.setCilindrada(250);
 		 auto.setModelo("20014");
 		 
@@ -20,7 +20,7 @@ public class EjemploAutomovil {
 		
 		Automovil auto2 = new Automovil();
 		 auto2.setFabricante("Nisan");
-		 auto2.setColor("rojo");
+		 auto2.setColor(Colores.AZUL);
 		 auto2.setCilindrada(250);
 		 auto2.setModelo("20014");
 		 

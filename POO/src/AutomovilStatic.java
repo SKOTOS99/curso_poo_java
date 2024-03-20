@@ -4,7 +4,7 @@ public class AutomovilStatic {
 	public static void main(String[] args) {
 		Automovil auto = new Automovil();
 		auto.setFabricante("Nisan");
-		auto.setColor(Automovil.COLOR_ROJO);
+		auto.setColor(Colores.AMARILLO);
 		auto.setCilindrada(250);
 		auto.setModelo("20014");
 		auto.setColorPatente("azul");
@@ -16,6 +16,7 @@ public class AutomovilStatic {
 		Automovil camaro = new Automovil();
 		camaro.setFabricante("changer");
 		camaro.setCantidadTanque(25);
+		camaro.setColor(Colores.AZUL);
 		System.out.println(camaro.detalle());
 		System.out.println(Automovil.velocidadMaximaCarretera);
 	}

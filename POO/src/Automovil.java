@@ -4,7 +4,7 @@ public class Automovil {
 	private int id;
 	private String fabricante;
 	private String modelo;
-	private String color;
+	private Colores color;
 	private int cantidadTanque = 40;
 	private double cilindrada;
 
@@ -18,7 +18,8 @@ public class Automovil {
 
 	public String detalle() {
 		return new StringBuilder("Fabricante: " + this.fabricante).append("\nid " + this.id)
-				.append(" \nModelo: " + this.modelo).append("\nColor: " + this.color)
+				.append(" \nModelo: " + this.modelo)
+				.append("\nColor: " + this.color.getColor())
 				.append("\nCilindrada: " + this.cilindrada).append("\nColorPatente: " + colorPatente)
 				.append("\nVelocidad: " + this.cilindrada * 100).toString();
 
@@ -101,12 +102,26 @@ public class Automovil {
 		this.modelo = modelo;
 	}
 
-	public String getColor() {
+
+
+	public Colores getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(Colores color) {
 		this.color = color;
+	}
+
+	public static Integer getVelocidadmaximacarretera() {
+		return velocidadMaximaCarretera;
+	}
+
+	public static Integer getVelociadaciudad() {
+		return velociadaCiudad;
+	}
+
+	public static String getColorRojo() {
+		return COLOR_ROJO;
 	}
 
 	public double getCilindrada() {
@@ -117,12 +132,12 @@ public class Automovil {
 		this.cilindrada = cilindrada;
 	}
 
-	public Automovil(String fabricante, String modelo, String color, int cantidadTanque, double cilindrada) {
+	public Automovil(String fabricante, String modelo, Colores color, int cantidadTanque, double cilindrada) {
 		this(fabricante, modelo, color, cantidadTanque);
 		this.cilindrada = cilindrada;
 	}
 
-	public Automovil(String fabricante, String modelo, String color) {
+	public Automovil(String fabricante, String modelo, Colores color) {
 		this();// hace el llamdo al constructo que no recibe parametros
 		this.fabricante = fabricante;
 		this.modelo = modelo;
@@ -130,7 +145,7 @@ public class Automovil {
 
 	}
 
-	public Automovil(String fabricante, String modelo, String color, int cantidadTanque) {
+	public Automovil(String fabricante, String modelo, Colores color, int cantidadTanque) {
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.color = color;
