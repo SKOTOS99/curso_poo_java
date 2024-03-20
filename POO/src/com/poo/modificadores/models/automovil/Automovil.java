@@ -1,4 +1,12 @@
+package com.poo.modificadores.models.automovil;
 
+import com.poo.modificadores.constants.Colores;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Automovil {
 
 	private int id;
@@ -13,43 +21,46 @@ public class Automovil {
 	private static int ultimoId;
 	public static final Integer velocidadMaximaCarretera = 120;
 	public static final Integer velociadaCiudad = 60;
-	
-	public static final String COLOR_ROJO = "rojo";
 
+	/**
+	 * Imprime la configuracion del objeto creado en formato string.
+	 *
+	 * @return String
+	 */
 	public String detalle() {
 		return new StringBuilder("Fabricante: " + this.fabricante).append("\nid " + this.id)
-				.append(" \nModelo: " + this.modelo)
-				.append("\nColor: " + this.color.getColor())
+				.append(" \nModelo: " + this.modelo).append("\nColor: " + this.color.getColor())
 				.append("\nCilindrada: " + this.cilindrada).append("\nColorPatente: " + colorPatente)
 				.append("\nVelocidad: " + this.cilindrada * 100).toString();
 
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public static int getCantidadTanqueStatic() {
-		return cantidadTanqueStatic;
-	}
-
-	public static void setCantidadTanqueStatic(int cantidadTanqueStatic) {
-		Automovil.cantidadTanqueStatic = cantidadTanqueStatic;
-	}
-
+	/**
+	 * Imprime la accion del objeto acelerar.
+	 *
+	 * @param rpm as variable
+	 * @return String
+	 */
 	public String acelerar(int rpm) {
 		return new StringBuilder("El auto: " + this.fabricante).append(" acelerando a " + rpm).append(" rpm")
 				.toString();
 	}
 
+	/**
+	 * Imprime la accion del objeto frenar.
+	 *
+	 * @param rpm as variable
+	 * @return String
+	 */
 	public String frenar() {
 		return new StringBuilder("El auto: " + this.fabricante).append(" frenando ").toString();
 	}
 
+	/**
+	 * Combina ambas acciones
+	 * @param rpm
+	 * @return String
+	 */
 	public String acelerarFrenar(int rpm) {
 		String acelerar = this.acelerar(rpm);
 		String frenar = this.frenar();
@@ -57,81 +68,44 @@ public class Automovil {
 
 	}
 
+	/**
+	 * Calcula el consumo de combustible del auto
+	 * @param km as integer
+	 * @param porcentajeGas as float
+	 * @return float
+	 */
 	public float calcularConsumo(int km, float porcentajeGas) {
 		return (km / (porcentajeGas * this.cantidadTanque));
 	}
 
+	/**
+	 * Calcula el consumo de conbustible usando parametros staticos
+	 * @param km
+	 * @param porcentajeGas
+	 * @return
+	 */
 	public static float calcularConsumoStatic(int km, float porcentajeGas) {
 		return (km / (porcentajeGas * Automovil.cantidadTanqueStatic));
 	}
 
-	public int getCantidadTanque() {
-		return cantidadTanque;
-	}
-
-	public void setCantidadTanque(int cantidadTanque) {
-		this.cantidadTanque = cantidadTanque;
-	}
-
-	public static String getColorPatente() {
-		return colorPatente;
-	}
-
-	public static void setColorPatente(String colorPatente) {
-		Automovil.colorPatente = colorPatente;
-	}
-
-	// sobrecarga de metodo
+	/**
+	 * Realiza el consumo de combustible con un porcentaje entero
+	 * @param km
+	 * @param porcentajeGas
+	 * @return
+	 */
 	public float calcularConsumo(int km, int porcentajeGas) {
 		return (km / ((porcentajeGas) / 100f * this.cantidadTanque));
 	}
 
-	public String getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-
-
-	public Colores getColor() {
-		return color;
-	}
-
-	public void setColor(Colores color) {
-		this.color = color;
-	}
-
-	public static Integer getVelocidadmaximacarretera() {
-		return velocidadMaximaCarretera;
-	}
-
-	public static Integer getVelociadaciudad() {
-		return velociadaCiudad;
-	}
-
-	public static String getColorRojo() {
-		return COLOR_ROJO;
-	}
-
-	public double getCilindrada() {
-		return cilindrada;
-	}
-
-	public void setCilindrada(double cilindrada) {
-		this.cilindrada = cilindrada;
-	}
-
+	/**
+	 * Constructor automovil
+	 * @param fabricante
+	 * @param modelo
+	 * @param color
+	 * @param cantidadTanque
+	 * @param cilindrada
+	 */
 	public Automovil(String fabricante, String modelo, Colores color, int cantidadTanque, double cilindrada) {
 		this(fabricante, modelo, color, cantidadTanque);
 		this.cilindrada = cilindrada;
@@ -164,16 +138,17 @@ public class Automovil {
 		Automovil a = (Automovil) obj;
 
 		return (this.fabricante != null && this.modelo != null && this.fabricante.equals(a.fabricante)
-				&& this.modelo.equals(a.getModelo()));
+				&& this.modelo.equals(a.modelo));
 	}
 
 	@Override
 	public String toString() {
-		return "Automovil [fabricante=" + fabricante + ", modelo=" + modelo + ", color=" + color + ", cantidadTanque="
-				+ cantidadTanque + ", cilindrada=" + cilindrada + ", detalle()=" + detalle() + ", frenar()=" + frenar()
-				+ ", getFabricante()=" + getFabricante() + ", getModelo()=" + getModelo() + ", getColor()=" + getColor()
-				+ ", getCilindrada()=" + getCilindrada() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Automovil [id=" + id + ", fabricante=" + fabricante + ", modelo=" + modelo + ", color=" + color
+				+ ", cantidadTanque=" + cantidadTanque + ", cilindrada=" + cilindrada + "]";
 	}
+	
 
+
+
+	
 }

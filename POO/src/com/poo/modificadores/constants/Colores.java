@@ -1,4 +1,8 @@
+package com.poo.modificadores.constants;
 
+import lombok.Getter;
+
+@Getter
 public enum Colores {
 	ROJO("Rojo"),
 	AMARILLO("Amarillo"),
@@ -11,9 +15,6 @@ public enum Colores {
 		this.color = color;
 	}
 
-	public String getColor() {
-		return color;
-	}
 	
 	
 	

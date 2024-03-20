@@ -1,0 +1,5 @@
+com\poo\modificadores\constants\Colores.class
+com\poo\modificadores\constants\TipoAuto.class
+com\poo\modificadores\models\automovil\Automovil.class
+com\poo\modificadores\EjemploAutomovil.class
+com\poo\modificadores\AutomovilStatic.class
