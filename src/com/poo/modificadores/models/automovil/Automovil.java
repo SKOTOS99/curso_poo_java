@@ -1,6 +1,7 @@
 package com.poo.modificadores.models.automovil;
 
 import com.poo.modificadores.constants.Colores;
+import com.poo.modificadores.constants.TipoAuto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +16,8 @@ public class Automovil {
 	private Colores color;
 	private int cantidadTanque = 40;
 	private double cilindrada;
-
 	private static String colorPatente = "naranja";
+	private TipoAuto tipo;
 	private static int cantidadTanqueStatic = 50;
 	private static int ultimoId;
 	public static final Integer velocidadMaximaCarretera = 120;
@@ -29,7 +30,8 @@ public class Automovil {
 	 */
 	public String detalle() {
 		return new StringBuilder("Fabricante: " + this.fabricante).append("\nid " + this.id)
-				.append(" \nModelo: " + this.modelo).append("\nColor: " + this.color.getColor())
+				.append(" \nModelo: " + this.modelo)
+				.append("\nTipo: "+ this.tipo.getNombre()).append("\nColor: " + this.color.getColor())
 				.append("\nCilindrada: " + this.cilindrada).append("\nColorPatente: " + colorPatente)
 				.append("\nVelocidad: " + this.cilindrada * 100).toString();
 

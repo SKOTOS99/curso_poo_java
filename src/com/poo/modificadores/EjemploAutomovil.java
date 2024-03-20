@@ -2,6 +2,7 @@ package com.poo.modificadores;
 import java.util.Date;
 
 import com.poo.modificadores.constants.Colores;
+import com.poo.modificadores.constants.TipoAuto;
 import com.poo.modificadores.models.automovil.Automovil;
 
 public class EjemploAutomovil {
@@ -13,6 +14,7 @@ public class EjemploAutomovil {
 		 auto.setFabricante("yamaha");
 		 auto.setCilindrada(1200);
 		 auto.setModelo("2024");
+		 auto.setTipo(TipoAuto.SEDAN);
 		 
 		 System.out.println(auto.detalle());
 
