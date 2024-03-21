@@ -1,5 +1,8 @@
 package com.poo.modificadores.models.automovil;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 import com.poo.modificadores.constants.Colores;
 import com.poo.modificadores.constants.TipoAuto;
 
@@ -17,8 +20,10 @@ public class Automovil {
 	private Tanque cantidadTanque;
 	private Motor motor;
 	private Rueda[] ruedas;
-	private static String colorPatente = Colores.AMARILLO.getColor();
 	private TipoAuto tipo;
+	private Persona conductor;
+	
+	private static String colorPatente = Colores.AMARILLO.getColor();
 	private static int cantidadTanqueStatic = 50;
 	private static int ultimoId;
 	public static final Integer velocidadMaximaCarretera = 120;
@@ -30,18 +35,20 @@ public class Automovil {
 	 * @return String
 	 */
 	public String detalle() {
-		return new StringBuilder("Fabricante: " + this.fabricante)
-				.append("\nid " + this.id)
-				.append("\nModelo: " + this.modelo)
-				.append("\nTipo: " + this.tipo.getNombre())
-				.append("\nCilindrada: " + this.motor.getCilindrada())
-				.append("\nTanque " + this.cantidadTanque.getCampacidad())
-				.append("\nRuedas " + this.ruedas[0])
-				.append("\nColor: " + this.color.getColor())
-				.append("\nColorPatente: " + colorPatente)
-				.append("\nVelocidad: " + this.motor.getCilindrada() * 100).toString();
+	    return new StringBuilder("Fabricante: " + this.fabricante)
+	            .append("\nid " + Optional.ofNullable(this.id).orElse(1))
+	            .append("\nConductor: " + Optional.ofNullable(this.conductor).map(Persona::getNombre).orElse("n/a"))
+	            .append("\nModelo: " + Optional.ofNullable(this.modelo).orElse("n/a"))
+	            .append("\nTipo: " + Optional.ofNullable(this.tipo).map(TipoAuto::getNombre).orElse("n/a"))
+	            .append("\nCilindrada: " + Optional.ofNullable(this.motor).map(Motor::getCilindrada).orElse(0.0))
+	            .append("\nTanque " + Optional.ofNullable(this.cantidadTanque).map(Tanque::getCampacidad).orElse(0))
+	            .append("\nRuedas " + Arrays.toString(Optional.ofNullable(this.ruedas).orElse(new Rueda[0])))
+	            .append("\nColor: " + Optional.ofNullable(this.color).map(Colores::getColor).orElse("n/a"))
+	            .append("\nColorPatente: " + colorPatente)
+	            .append("\nVelocidad: " + Optional.ofNullable(this.motor).map(Motor::getCilindrada).orElse(0.0) * 100).toString();
 
 	}
+	
 	
 	public void imprimeRuedas(Rueda[] ruedas) {
 		for(Rueda rueda: ruedas) {
@@ -109,57 +116,33 @@ public class Automovil {
 	 * @return
 	 */
 	public float calcularConsumo(int km, int porcentajeGas) {
-		return (km / ((porcentajeGas) / 100f * this.cantidadTanque.getCampacidad()));
+		return (km / ((porcentajeGas) / 100f *Optional.ofNullable(this.cantidadTanque).map(Tanque::getCampacidad).orElse(1)));
 	}
 
-	/**
-	 * Constructor automovil
-	 * @param fabricante
-	 * @param modelo
-	 * @param color
-	 * @param cantidadTanque
-	 * @param cilindrada
-	 */
-	public Automovil(String fabricante, String modelo, Colores color, Tanque cantidadTanque, Motor cilindrada) {
-		this(fabricante, modelo, color, cantidadTanque);
-		this.motor = cilindrada;
-	}
 
-	public Automovil(String fabricante, String modelo, Colores color) {
-		this();// hace el llamdo al constructo que no recibe parametros
-		this.fabricante = fabricante;
-		this.modelo = modelo;
-		this.color = color;
-
-	}
-
-	public Automovil(String fabricante, String modelo, Colores color, Tanque cantidadTanque) {
+	public Automovil(int id, Persona conductor, String fabricante, String modelo, Colores color, Tanque cantidadTanque, Motor motor,
+			Rueda[] ruedas) {
+		super();
+		this.id = id;
+		this.conductor = conductor;
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.color = color;
 		this.cantidadTanque = cantidadTanque;
+		this.motor = motor;
+		this.ruedas = ruedas;
 	}
+
 
 	public Automovil() {
-		this.id = ++Automovil.ultimoId;
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Automovil)) {
-			return false;
-		}
-		Automovil a = (Automovil) obj;
+	
 
-		return (this.fabricante != null && this.modelo != null && this.fabricante.equals(a.fabricante)
-				&& this.modelo.equals(a.modelo));
-	}
 
-	@Override
-	public String toString() {
-		return "Automovil [id=" + id + ", fabricante=" + fabricante + ", modelo=" + modelo + ", color=" + color
-				+ ", cantidadTanque=" + cantidadTanque + ", cilindrada=" + motor + "]";
-	}
+
 	
 
 
