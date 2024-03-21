@@ -14,9 +14,10 @@ public class Automovil {
 	private String fabricante;
 	private String modelo;
 	private Colores color;
-	private int cantidadTanque = 40;
-	private double cilindrada;
-	private static String colorPatente = "naranja";
+	private Tanque cantidadTanque;
+	private Motor motor;
+	private Rueda[] ruedas;
+	private static String colorPatente = Colores.AMARILLO.getColor();
 	private TipoAuto tipo;
 	private static int cantidadTanqueStatic = 50;
 	private static int ultimoId;
@@ -29,12 +30,23 @@ public class Automovil {
 	 * @return String
 	 */
 	public String detalle() {
-		return new StringBuilder("Fabricante: " + this.fabricante).append("\nid " + this.id)
-				.append(" \nModelo: " + this.modelo)
-				.append("\nTipo: "+ this.tipo.getNombre()).append("\nColor: " + this.color.getColor())
-				.append("\nCilindrada: " + this.cilindrada).append("\nColorPatente: " + colorPatente)
-				.append("\nVelocidad: " + this.cilindrada * 100).toString();
+		return new StringBuilder("Fabricante: " + this.fabricante)
+				.append("\nid " + this.id)
+				.append("\nModelo: " + this.modelo)
+				.append("\nTipo: " + this.tipo.getNombre())
+				.append("\nCilindrada: " + this.motor.getCilindrada())
+				.append("\nTanque " + this.cantidadTanque.getCampacidad())
+				.append("\nRuedas " + this.ruedas[0])
+				.append("\nColor: " + this.color.getColor())
+				.append("\nColorPatente: " + colorPatente)
+				.append("\nVelocidad: " + this.motor.getCilindrada() * 100).toString();
 
+	}
+	
+	public void imprimeRuedas(Rueda[] ruedas) {
+		for(Rueda rueda: ruedas) {
+			System.out.println(rueda);
+		}
 	}
 
 	/**
@@ -77,7 +89,7 @@ public class Automovil {
 	 * @return float
 	 */
 	public float calcularConsumo(int km, float porcentajeGas) {
-		return (km / (porcentajeGas * this.cantidadTanque));
+		return (km / (porcentajeGas * this.cantidadTanque.getCampacidad()));
 	}
 
 	/**
@@ -97,7 +109,7 @@ public class Automovil {
 	 * @return
 	 */
 	public float calcularConsumo(int km, int porcentajeGas) {
-		return (km / ((porcentajeGas) / 100f * this.cantidadTanque));
+		return (km / ((porcentajeGas) / 100f * this.cantidadTanque.getCampacidad()));
 	}
 
 	/**
@@ -108,9 +120,9 @@ public class Automovil {
 	 * @param cantidadTanque
 	 * @param cilindrada
 	 */
-	public Automovil(String fabricante, String modelo, Colores color, int cantidadTanque, double cilindrada) {
+	public Automovil(String fabricante, String modelo, Colores color, Tanque cantidadTanque, Motor cilindrada) {
 		this(fabricante, modelo, color, cantidadTanque);
-		this.cilindrada = cilindrada;
+		this.motor = cilindrada;
 	}
 
 	public Automovil(String fabricante, String modelo, Colores color) {
@@ -121,7 +133,7 @@ public class Automovil {
 
 	}
 
-	public Automovil(String fabricante, String modelo, Colores color, int cantidadTanque) {
+	public Automovil(String fabricante, String modelo, Colores color, Tanque cantidadTanque) {
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.color = color;
@@ -146,7 +158,7 @@ public class Automovil {
 	@Override
 	public String toString() {
 		return "Automovil [id=" + id + ", fabricante=" + fabricante + ", modelo=" + modelo + ", color=" + color
-				+ ", cantidadTanque=" + cantidadTanque + ", cilindrada=" + cilindrada + "]";
+				+ ", cantidadTanque=" + cantidadTanque + ", cilindrada=" + motor + "]";
 	}
 	
 
