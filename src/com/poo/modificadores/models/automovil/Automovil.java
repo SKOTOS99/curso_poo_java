@@ -8,10 +8,12 @@ import com.poo.modificadores.constants.TipoAuto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class Automovil {
+@ToString
+public class Automovil implements Comparable<Automovil>{
 
 	private int id;
 	private String fabricante;
@@ -118,12 +120,14 @@ public class Automovil {
 	public float calcularConsumo(int km, int porcentajeGas) {
 		return (km / ((porcentajeGas) / 100f *Optional.ofNullable(this.cantidadTanque).map(Tanque::getCampacidad).orElse(1)));
 	}
+	public Automovil() {
+		this.id = ++Automovil.ultimoId;
+	}
 
 
 	public Automovil(int id, Persona conductor, String fabricante, String modelo, Colores color, Tanque cantidadTanque, Motor motor,
 			Rueda[] ruedas) {
-		super();
-		this.id = id;
+		this();
 		this.conductor = conductor;
 		this.fabricante = fabricante;
 		this.modelo = modelo;
@@ -134,18 +138,20 @@ public class Automovil {
 	}
 
 
-	public Automovil() {
-		super();
-		// TODO Auto-generated constructor stub
+
+
+	@Override
+	public int compareTo(Automovil o) {		
+		return this.fabricante.compareTo(o.getFabricante());
 	}
 
 	
 
-
-
-	
-
-
-
-	
 }
+
+	
+
+
+
+	
+
